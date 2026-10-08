@@ -6,7 +6,7 @@ import path from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { createApp } from '../server.mjs';
 import { appendInquiry, readInquiryFile, withInquiryLock } from '../lib/inquiry-store.mjs';
-import { createInquiryMailer, formSubmitPayload, submitToFormSubmit, validateEmailDestination } from '../lib/inquiry-email.mjs';
+import { createInquiryMailer, formSubmitPayload, safeProviderMessage, submitToFormSubmit, validateEmailDestination } from '../lib/inquiry-email.mjs';
 
 const record = () => ({ id: randomUUID(), receivedAt: '2026-10-08T00:00:00Z', type: 'iot', name: '테스트 문의', company: '테스트 회사', phone: '010-1234-5678', message: '가상의 테스트 시설에 대한 문의입니다.', consent: true });
 const acceptedResponse = () => new Response(JSON.stringify({ success: 'true', message: 'Form submitted successfully' }), { status: 200, headers: { 'Content-Type': 'application/json' } });
@@ -35,6 +35,7 @@ test('provider JSON acceptance stays distinct from activation and mailbox delive
   const options = { emailTo: 'recipient@example.test', siteUrl: 'https://yurim.example.test', fetchImpl: async (url, init) => { requests.push({ url, init }); return acceptedResponse(); } };
   const result = await submitToFormSubmit(record(), options);
   assert.equal(result.status, 'accepted');
+  assert.equal(result.providerAccepted, true);
   assert.equal(result.deliveryConfirmed, false);
   assert.equal(requests[0].url, 'https://formsubmit.co/ajax/recipient%40example.test');
   assert.equal(requests[0].init.method, 'POST');
@@ -42,6 +43,35 @@ test('provider JSON acceptance stays distinct from activation and mailbox delive
   const activation = await submitToFormSubmit(record(), { ...options, fetchImpl: async () => new Response(JSON.stringify({ success: true, message: 'Please activate your form by confirming your email' }), { status: 200 }) });
   assert.equal(activation.status, 'activation_required');
   assert.equal(activation.deliveryConfirmed, false);
+});
+
+test('provider diagnostics are bounded, strip markup and redact contact data', () => {
+  const item = record();
+  const message = `<strong>Error</strong> ${item.name} ${item.phone} recipient@example.test\n${'x'.repeat(400)}`;
+  const safe = safeProviderMessage(message, item);
+  assert.ok(safe.length <= 300);
+  assert.ok(!safe.includes('<strong>'));
+  assert.ok(!safe.includes(item.name));
+  assert.ok(!safe.includes(item.phone));
+  assert.ok(!safe.includes('recipient@example.test'));
+  assert.ok(!safe.includes('\n'));
+});
+
+test('actual FormSubmit success:false activation response requires confirmation without acceptance claim', async () => {
+  const response = await submitToFormSubmit(record(), {
+    emailTo: 'recipient@example.test',
+    fetchImpl: async () => new Response(JSON.stringify({ success: 'false', message: 'This form needs Activation. We have sent you an email containing an Activate Form link. Click the link to activate your form.' }), { status: 200 }),
+  });
+  assert.equal(response.status, 'activation_required');
+  assert.equal(response.errorCode, 'ACTIVATION_REQUIRED');
+  assert.equal(response.providerAccepted, false);
+  assert.equal(response.deliveryConfirmed, false);
+  const rejected = await submitToFormSubmit(record(), {
+    emailTo: 'recipient@example.test',
+    fetchImpl: async () => new Response(JSON.stringify({ success: false, message: 'Form already activated, but invalid input.' }), { status: 200 }),
+  });
+  assert.equal(rejected.status, 'retry');
+  assert.equal(rejected.errorCode, 'PROVIDER_REJECTED');
 });
 
 test('HTTP rejection, invalid responses and timeout are never reported as accepted', async () => {

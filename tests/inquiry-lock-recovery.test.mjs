@@ -67,13 +67,17 @@ test('simultaneous callers recover one abandoned lock and preserve exclusive ent
   let active = 0;
   let peak = 0;
   let entered = 0;
-  await Promise.all(Array.from({ length: 5 }, () => withInquiryLock(dir, async () => {
-    active++;
-    peak = Math.max(peak, active);
-    entered++;
-    await new Promise((resolve) => setTimeout(resolve, 5));
-    active--;
-  }, { timeoutMs: 1000, pollMs: 5 })));
-  assert.equal(entered, 5);
+  // Repeat acquisition/removal to exercise Windows' brief delete-pending state,
+  // in addition to recovery of the first abandoned owner's lock.
+  for (let round = 0; round < 20; round++) {
+    await Promise.all(Array.from({ length: 5 }, () => withInquiryLock(dir, async () => {
+      active++;
+      peak = Math.max(peak, active);
+      entered++;
+      await new Promise((resolve) => setTimeout(resolve, 2));
+      active--;
+    }, { timeoutMs: 2000, pollMs: 2 })));
+  }
+  assert.equal(entered, 100);
   assert.equal(peak, 1);
 });

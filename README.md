@@ -74,7 +74,7 @@ FormSubmit은 처음 접수할 때 수신 주소로 활성화 메일을 보냅�
 | --- | --- |
 | `pending` / `sending` | 전송 대기 / 요청 진행 중 |
 | `accepted` | 서비스가 접수를 수락함. 활성화 여부·메일 도착은 미확인 |
-| `activation_required` | 서비스 응답에 활성화 안내가 있음 |
+| `activation_required` | 서비스 응답에 명시적인 활성화 요구가 있음. HTTP 200이어도 `success: false`일 수 있으며 접수 수락·메일 수신으로 표시하지 않음 |
 | `retry` | 요청 실패로 다음 전송 대기 |
 | `failed` | 최대 3회 시도 후 실패. 담당자가 저장 문의를 직접 확인해야 함 |
 
