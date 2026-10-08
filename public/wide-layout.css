@@ -20,6 +20,7 @@
 .menu-grid a{font-size:18px;line-height:1.65;padding:7px 0}
 .menu-grid .nested{font-size:16px!important}
 .menu-grid .eyebrow{font-size:12px}
+.hero{height:100svh;min-height:0;max-height:none}
 .hero-line{display:block}
 .subnav{font-size:17px;gap:30px}
 .subnav .nested{font-size:16px!important}
@@ -54,7 +55,7 @@
  .section{max-width:1920px;padding:78px 4vw}
  .section-heading{gap:48px;margin-bottom:38px}
  .section-heading h2,h2{font-size:clamp(44px,3.9vw,64px)}
- .hero{height:clamp(580px,56.25vw,900px);min-height:0;max-height:100svh}
+ .hero{height:100svh;min-height:0;max-height:none}
  .hero-content{left:4vw;right:4vw;top:50%;transform:translateY(-50%)}
  .hero h1{font-size:clamp(54px,5vw,90px);line-height:1.25;margin:26px 0;font-weight:500}
  .hero-line{display:inline}.hero-line+ .hero-line{margin-left:.18em}
@@ -86,7 +87,7 @@
  .site-header{padding-left:3vw;padding-right:3vw;gap:18px}
  .desktop-nav{font-size:17px;gap:18px}.brand>span{font-size:19px}.brand small{font-size:8px}
  .header-tools{gap:15px}.language{font-size:12px}
- .hero{height:clamp(600px,56.25vw,760px);min-height:0}
+ .hero{height:100svh;min-height:0;max-height:none}
  .hero h1{font-size:60px}.hero-content p{font-size:18px}.hero-link{font-size:16px}
  .hero-content .eyebrow{font-size:12px}
  .section{padding-left:4vw;padding-right:4vw}.section-heading h2{font-size:40px}
