@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { randomUUID, timingSafeEqual } from 'node:crypto';
 import { appendInquiry, readInquiryFile, withInquiryLock } from './lib/inquiry-store.mjs';
+import { createInquiryMailer } from './lib/inquiry-email.mjs';
 
 const ROOT = path.dirname(fileURLToPath(import.meta.url));
 const MAX_BODY = 32 * 1024;
@@ -237,6 +238,9 @@ export function createApp(options = {}) {
   const { validToken } = validateRuntimeConfiguration({ production, adminToken, publicOrigin });
   const rateLimit = options.rateLimit ?? 5;
   const rateWindow = options.rateWindow ?? 15 * 60 * 1000;
+  const emailTo = options.emailTo ?? process.env.EMAIL_TO ?? (production ? 'yurimkorea@gmail.com' : '');
+  const siteUrl = publicOrigin || (process.env.FLY_APP_NAME ? `https://${process.env.FLY_APP_NAME}.fly.dev` : undefined);
+  const mailer = createInquiryMailer({ dataDir, emailTo, siteUrl, fetchImpl: options.emailFetch, timeoutMs: options.emailTimeoutMs, intervalMs: options.emailIntervalMs });
   const attempts = new Map();
   let appendQueue = Promise.resolve();
 
@@ -304,8 +308,10 @@ export function createApp(options = {}) {
           if (!result.valid) return json(res, 422, { ok: false, error: '입력 내용을 확인해 주세요.', errors: result.errors });
           if (result.honeypot) return json(res, 422, { ok: false, error: '문의 요청을 확인해 주세요.' });
           const id = randomUUID();
-          await saveInquiry({ id, receivedAt: new Date().toISOString(), ...result.value, privacyVersion: '2026-10-08' });
-          return json(res, 201, { ok: true, id, message: '문의가 접수되었습니다. 확인 후 연락드리겠습니다.' });
+          const emailForwarding = mailer.initialState();
+          await saveInquiry({ id, receivedAt: new Date().toISOString(), ...result.value, privacyVersion: '2026-10-08', ...(emailForwarding ? { emailForwarding } : {}) });
+          if (emailForwarding) mailer.schedule(id);
+          return json(res, 201, { ok: true, id, message: '문의가 접수되었습니다. 확인 후 연락드리겠습니다.', ...(emailForwarding ? { emailForwarding: { status: 'pending', deliveryConfirmed: false } } : {}) });
         }
         if (req.method === 'GET') {
           if (!validToken) return json(res, 503, { error: '관리자 조회가 설정되어 있지 않습니다.' });
@@ -350,7 +356,10 @@ export function createApp(options = {}) {
   server.on('clientError', (_error, socket) => {
     if (socket.writable) socket.end('HTTP/1.1 400 Bad Request\r\nConnection: close\r\n\r\n');
   });
-  server.pendingWrites = () => appendQueue;
+  server.pendingWrites = () => Promise.all([appendQueue, mailer.pending()]);
+  server.stopBackgroundWork = () => mailer.stop();
+  server.on('close', () => mailer.stop());
+  server.retryPendingEmails = () => mailer.drain();
   return server;
 }
 
@@ -362,13 +371,17 @@ export async function startServer() {
   await mkdir(dataDir, { recursive: true, mode: 0o700 });
   await access(dataDir, constants.W_OK);
   const server = createApp({ renderPage });
-  server.listen(port, process.env.HOST || '0.0.0.0', () => console.log(`유림엔지니어링 website listening on port ${port}`));
+  server.listen(port, process.env.HOST || '0.0.0.0', () => {
+    console.log(`유림엔지니어링 website listening on port ${port}`);
+    server.retryPendingEmails().catch((error) => console.error('Inquiry email queue unavailable:', error.code || 'STORE_ERROR'));
+  });
   let stopping = false;
   const shutdown = () => {
     if (stopping) return;
     stopping = true;
     const deadline = setTimeout(() => process.exit(1), 10_000);
     deadline.unref();
+    server.stopBackgroundWork();
     server.close(async () => {
       try { await server.pendingWrites(); process.exitCode = 0; } catch { process.exitCode = 1; }
       clearTimeout(deadline);

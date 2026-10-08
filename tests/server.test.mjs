@@ -23,7 +23,7 @@ async function fixture(t, options = {}) {
   await writeFile(path.join(publicDir, 'downloads', '소개자료.pdf'), 'test pdf');
   await writeFile(path.join(dir, 'secret.txt'), 'not public');
   const app = createApp({
-    publicDir, dataDir, adminToken: token, rateLimit: 100,
+    publicDir, dataDir, adminToken: token, rateLimit: 100, emailTo: '',
     renderPage: (pathname) => ({ html: `<h1>${pathname === '/' ? '유림엔지니어링' : '찾을 수 없음'}</h1>`, status: pathname === '/' ? 200 : 404 }),
     ...options,
   });

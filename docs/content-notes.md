@@ -31,3 +31,7 @@ Y 심볼과 워드마크는 이 홈페이지를 위해 만든 디자인 시안�
 - [도화엔지니어링](https://www.dohwa.co.kr/main): 넓은 비주얼과 사업 소개의 흐름 참고.
 - [핸스](https://www.hence.co.kr/): 메인 영상과 큰 제목 구성을 참고.
 - [모니트](https://monnit.co.kr/), [고강이앤씨](http://www.helical.kr/), [예한](https://yehan2015.com/): 엑셀에 지정된 참고 대상. 이번 실행에서 도화·핸스·예한을 확인했으며 모니트·고강 사이트는 읽기 도구에서 접속되지 않았다. 참고 회사의 문구·성과·이미지를 유림의 정보로 복사하지 않았다.
+
+## 사업 소개 이미지
+
+`water-treatment-visual.jpg`와 `civil-construction-visual.jpg`은 사업 소개용 생성 이미지입니다. 특정 유림 시공 실적이나 실재 고객 현장 사진으로 표시하지 않습니다. 메인 현장 사진 갤러리의 `farm-treatment.jpg`, `farm-yard-application.jpg`는 제공 실증 결과 PPT에서 추출한 실제 사진입니다.
