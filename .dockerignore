@@ -1,0 +1,11 @@
+.git
+.gitignore
+node_modules
+data
+.env
+.env.*
+tests
+work
+README.md
+fly.toml.example
+*.log
