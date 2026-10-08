@@ -55,7 +55,7 @@
  .section-heading{gap:48px;margin-bottom:38px}
  .section-heading h2,h2{font-size:clamp(44px,3.9vw,64px)}
  .hero{height:clamp(580px,56.25vw,900px);min-height:0;max-height:100svh}
- .hero-content{left:4vw;right:4vw;top:50%;transform:translateY(-39%)}
+ .hero-content{left:4vw;right:4vw;top:50%;transform:translateY(-50%)}
  .hero h1{font-size:clamp(54px,5vw,90px);line-height:1.25;margin:26px 0;font-weight:500}
  .hero-line{display:inline}.hero-line+ .hero-line{margin-left:.18em}
  .hero-content .eyebrow{font-size:12px}
