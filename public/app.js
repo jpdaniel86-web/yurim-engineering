@@ -1,5 +1,8 @@
 (()=>{
  const header=document.querySelector('.site-header');const back=document.querySelector('.back-top');
+ const tabs=document.querySelector('.subnav'),activeTab=tabs?.querySelector('.active');
+ const centerActiveTab=()=>{if(tabs&&activeTab)tabs.scrollLeft=Math.max(0,activeTab.offsetLeft-(tabs.clientWidth-activeTab.offsetWidth)/2)};
+ centerActiveTab();document.fonts?.ready.then(centerActiveTab);if(tabs&&activeTab&&'ResizeObserver' in window)new ResizeObserver(centerActiveTab).observe(tabs);
  function onScroll(){header?.classList.toggle('scrolled',scrollY>50);back?.classList.toggle('visible',scrollY>500)}onScroll();addEventListener('scroll',onScroll,{passive:true});back?.addEventListener('click',()=>scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'}));
  const menu=document.querySelector('#full-menu'),toggle=document.querySelector('.menu-toggle'),close=document.querySelector('.menu-close');let lastFocus;
  const setMenu=open=>{menu.hidden=!open;document.body.classList.toggle('menu-open',open);toggle.setAttribute('aria-expanded',String(open));if(open){lastFocus=document.activeElement;close.focus()}else lastFocus?.focus()};

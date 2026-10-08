@@ -1,0 +1,101 @@
+/* Photo-led inner pages, with Yurim green and lime accents. */
+:root{--brand:#00843d;--soft-green:#f1f6ed}
+.inner-page .nav-item>a[aria-current]{color:var(--brand)}
+.nav-item:last-child .nav-dropdown{left:auto;right:0}
+.inner-page .page-hero.image-hero{position:relative;isolation:isolate;min-height:0;height:clamp(380px,24vw,480px);padding:48px 4vw 66px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--deep);color:#fff;text-align:center}
+.page-hero-image,.page-hero-shade{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.page-hero-image{object-fit:cover;object-position:center 48%}
+.page-hero-shade{z-index:-1;background:linear-gradient(90deg,#082e2373,#082e2329),linear-gradient(0deg,#06291fd9,transparent 85%)}
+.image-hero .breadcrumb{position:absolute;left:4vw;right:4vw;top:26px;margin:0;justify-content:flex-start;color:#ffffffc4;text-align:left;font-size:12px}
+.image-hero .breadcrumb a:hover{color:var(--lime)}
+.page-hero-copy{max-width:1450px;padding-top:22px}
+.image-hero .eyebrow{font-size:clamp(13px,1.1vw,18px);letter-spacing:.12em;color:var(--lime);font-weight:700}
+.image-hero h1{color:#fff;font-size:clamp(38px,3.6vw,72px);font-weight:700;line-height:1.28;margin:14px 0 17px;letter-spacing:-.055em;text-shadow:0 2px 18px #06291f45}
+.page-hero-lead{color:#ffffffd9;font-size:clamp(17px,1.25vw,24px);line-height:1.65;margin:0}
+.hero-image-context{position:absolute;right:4vw;bottom:48px;padding:5px 10px;background:#092e23aa;color:#ffffffd9;font-size:12px;letter-spacing:0}
+.inner-page .subnav{position:relative;z-index:3;display:flex;align-items:stretch;gap:0;max-width:1760px;width:calc(100% - 8vw);min-height:74px;margin:-32px auto 0;padding:0;background:#fff;border:0;box-shadow:0 12px 34px #102e2712;scrollbar-width:thin;scrollbar-color:#b7cbbb #fff}
+.inner-page .subnav a{display:flex;align-items:center;justify-content:center;flex:1 0 auto;padding:20px 28px;font-size:18px;border-right:1px solid #e9eee7;transition:background .2s,color .2s}
+.inner-page .subnav a:hover{color:var(--brand);background:var(--soft-green)}
+.inner-page .subnav a.active{background:var(--brand);color:#fff;font-weight:700}
+.inner-page .subnav a.active:after{display:none}
+.inner-page .subnav .nested{font-size:16px!important;opacity:1;padding-left:25px!important}
+.inner-page .section .eyebrow{color:var(--brand)}
+.inner-page .section-heading h2,.inner-page .service-summary h2,.inner-page .technology-detail h2,.inner-page .equipment-layout h2,.inner-page .project-description h2,.inner-page .company-intro h2,.inner-page .history>h2,.inner-page .certification-page>h2,.inner-page .location-info h2,.inner-page .contact-intro h2{border-left:5px solid var(--brand);padding-left:22px}
+.inner-page .button{background:var(--brand)}
+.inner-page .button:hover{background:#006c32}
+.inner-page .service-visual,.inner-page .technology-visual{aspect-ratio:1.55;min-height:0;overflow:hidden;background:var(--soft-green)}
+.inner-page .service-visual>img,.inner-page .technology-visual>img{width:100%;height:100%;object-fit:cover}
+.inner-page .service-visual>img[src$="smart-inspection.jpg"],.inner-page .technology-visual>img[src$="smart-inspection.jpg"]{object-position:70% center}
+.detail-photo-gallery{padding-top:0!important}
+.detail-photo-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:28px}
+.detail-photo-grid figure{margin:0}
+.detail-photo-grid img{width:100%;aspect-ratio:1.8;object-fit:cover}
+.detail-photo-grid figcaption{font-size:15px;color:var(--muted);margin-top:14px}
+.inner-page .scope-grid>div{padding:26px;background:var(--soft-green);border-top:3px solid var(--lime)}
+.inner-page .scope-grid>div>span{color:var(--brand);font-weight:800;letter-spacing:.05em}
+.inner-page .scope-grid h3{margin-top:15px}
+.inner-page .process-section{max-width:none;background:var(--deep);color:#fff}
+.inner-page .process-section .eyebrow,.inner-page .process-list li span,.inner-page .process-list li b{color:var(--lime)}
+.inner-page .process-list li{border-top-color:#ffffff35}
+.inner-page .process-list li h3{color:#fff}
+.inner-page .project-cover{position:relative;overflow:hidden}
+.image-context{position:absolute;right:16px;bottom:16px;z-index:2;background:#ffffffed;color:var(--pine);padding:5px 10px;font-size:12px;font-weight:600;letter-spacing:0;line-height:1.5}
+.project-image .image-context{right:auto;left:18px;bottom:18px}
+.inner-page .project-tag{background:var(--brand);color:#fff}
+.inner-page .tech-card{background:var(--soft-green);padding:30px;display:flex;flex-direction:column}
+.inner-page .tech-card h2{font-size:34px;margin:15px 0}
+.inner-page .tech-card p{max-width:100%;margin-bottom:26px}
+.inner-page .tech-card>.detail-photo{height:auto;aspect-ratio:1.9;width:calc(100% + 60px);max-width:none;margin:10px -30px -30px;object-fit:cover}
+.inner-page .tech-card>.circle-arrow{right:20px;bottom:20px;background:var(--lime);color:var(--deep);border:0}
+.inner-page .equipment-photo{margin:0;align-self:start}
+.inner-page .equipment-photo img{width:100%;aspect-ratio:1.3;object-fit:cover}
+.inner-page .equipment-photo figcaption{color:var(--muted);font-size:14px;margin-top:13px}
+.inner-page .company-values{background:var(--deep)}
+.inner-page .company-values span{color:var(--lime)}
+.inner-page .company-values h3{color:#fff}
+.inner-page .company-values p{color:#ffffffba}
+.inner-page .ceo-aside{position:relative;isolation:isolate;overflow:hidden;background:var(--deep);color:#fff}
+.inner-page .ceo-aside>.detail-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:42% center;z-index:-2}
+.inner-page .ceo-aside:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#06291f45,#06291f90);z-index:-1}
+.inner-page .timeline-row>strong{color:var(--brand)}
+.inner-page .document-panels>div{border-top:3px solid var(--lime);background:var(--soft-green)}
+.inner-page .resource-row:hover{background:var(--soft-green)}
+.inner-page .file-type{color:var(--brand);border-color:#bdd8c7}
+.inner-page .search-box:focus-within{border-color:var(--brand)}
+.inner-page .inquiry-form input:focus,.inner-page .inquiry-form textarea:focus{outline-color:var(--brand);border-color:var(--brand)}
+@media(min-width:1800px){
+ .inner-page .subnav a{font-size:22px;padding:24px 34px}.inner-page .subnav .nested{font-size:20px!important}
+ .inner-page .tech-card h2{font-size:42px}.detail-photo-grid figcaption{font-size:18px}
+}
+@media(max-width:1159px){
+ .inner-page .subnav a{font-size:16px;padding:18px 22px}.inner-page .subnav .nested{font-size:15px!important}
+ .image-hero h1{font-size:44px}.inner-page .service-visual,.inner-page .technology-visual{aspect-ratio:1.45}
+}
+@media(max-width:900px){
+ .inner-page .page-hero.image-hero{height:360px;padding-left:25px;padding-right:25px}
+ .image-hero .breadcrumb{left:25px;right:25px;font-size:11px}
+ .inner-page .subnav{width:calc(100% - 50px)}
+ .inner-page .tech-card h2{font-size:30px}
+ .detail-photo-grid{gap:20px}
+}
+@media(max-width:640px){
+ .inner-page .page-hero.image-hero{height:330px;padding:42px 24px 54px}
+ .image-hero .breadcrumb{left:24px;right:24px;top:20px;gap:9px;font-size:10px;overflow:hidden;white-space:nowrap}
+ .page-hero-copy{padding-top:28px;width:100%}
+ .image-hero .eyebrow{font-size:11px;letter-spacing:.1em}
+ .image-hero h1{font-size:30px;overflow-wrap:anywhere;margin:14px 0 16px;line-height:1.4}
+ .page-hero-lead{font-size:15px;line-height:1.65}
+ .hero-image-context{bottom:35px;right:24px;font-size:10px}
+ .inner-page .subnav{width:calc(100% - 32px);margin-top:-24px;min-height:61px}
+ .inner-page .subnav a{font-size:15px;padding:16px 21px;flex:0 0 auto}
+ .inner-page .subnav .nested{font-size:14px!important;padding-left:20px!important}
+ .inner-page .section-heading h2,.inner-page .service-summary h2,.inner-page .technology-detail h2,.inner-page .equipment-layout h2,.inner-page .project-description h2,.inner-page .company-intro h2,.inner-page .history>h2,.inner-page .certification-page>h2,.inner-page .location-info h2,.inner-page .contact-intro h2{padding-left:15px;border-left-width:4px}
+ .inner-page .service-visual,.inner-page .technology-visual{aspect-ratio:1.35}
+ .detail-photo-grid{grid-template-columns:1fr;gap:26px}
+ .detail-photo-grid figcaption{font-size:13px;margin-top:10px}
+ .inner-page .scope-grid>div{padding:20px}
+ .inner-page .tech-card{padding:24px}.inner-page .tech-card h2{font-size:28px}
+ .inner-page .tech-card>.detail-photo{width:calc(100% + 48px);margin-left:-24px;margin-right:-24px;margin-bottom:-24px}
+ .image-context{font-size:10px;right:10px;bottom:10px}
+ .inner-page .equipment-photo figcaption{font-size:12px}
+}
