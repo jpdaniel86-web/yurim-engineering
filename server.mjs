@@ -50,6 +50,28 @@ function json(res, status, body, method = 'GET') {
   res.end(method === 'HEAD' ? undefined : content);
 }
 
+function inquiryHtml(res, status, content) {
+  res.writeHead(status, {
+    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Length': Buffer.byteLength(content),
+    'Cache-Control': 'no-store',
+    'Referrer-Policy': 'no-referrer',
+  });
+  res.end(content);
+}
+
+const escapeHTML = value => String(value ?? '').replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+
+// A usable response remains available even when the full page renderer is unavailable.
+function fallbackInquiryResponse({ status, message, errors = {}, id, emailForwarding, values = {} }) {
+  const accepted = status === 201;
+  const type = TYPES.has(values.type) ? values.type : 'construction';
+  const detail = accepted
+    ? `<p>접수번호: ${escapeHTML(id)}</p>${emailForwarding ? '<p>문의는 접수되었으며 담당자 이메일 전달은 대기 중입니다.</p>' : ''}`
+    : `<ul>${Object.values(errors).map(error => `<li>${escapeHTML(error)}</li>`).join('')}</ul>`;
+  return `<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>문의 ${accepted ? '접수 완료' : '안내'} | 유림엔지니어링</title><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/wide-layout.css"></head><body><main class="section prose"><a href="/">유림엔지니어링</a><h1>${accepted ? '문의가 접수되었습니다.' : '문의 접수를 확인해 주세요.'}</h1><p>${escapeHTML(message)}</p>${detail}<p>빠른 상담은 <a href="tel:0317748358">031-774-8358</a> 또는 <a href="mailto:yurimkorea@gmail.com">yurimkorea@gmail.com</a>으로 연락해 주세요.</p><a class="button" href="/contact/${type}">${accepted ? '문의 페이지로' : '문의 다시 작성하기'}</a></main></body></html>`;
+}
+
 function httpError(status, message) {
   return Object.assign(new Error(message), { status });
 }
@@ -104,7 +126,7 @@ export function validateInquiry(input) {
   };
 }
 
-async function readJson(req, limit = MAX_BODY) {
+async function readBody(req, limit = MAX_BODY) {
   const declaredLength = req.headers['content-length'];
   if (declaredLength && (!/^\d+$/.test(declaredLength) || Number(declaredLength) > limit)) {
     req.resume();
@@ -127,17 +149,30 @@ async function readJson(req, limit = MAX_BODY) {
     });
     req.on('end', () => {
       if (settled) return;
-      try {
-        const parsed = JSON.parse(Buffer.concat(chunks).toString('utf8'));
-        settled = true;
-        resolve(parsed);
-      } catch {
-        fail(httpError(400, '올바른 JSON 요청이 필요합니다.'));
-      }
+      settled = true;
+      resolve(Buffer.concat(chunks).toString('utf8'));
     });
     req.on('aborted', () => fail(httpError(400, '요청이 중단되었습니다.')));
     req.on('error', () => fail(httpError(400, '요청을 읽을 수 없습니다.')));
   });
+}
+
+async function readJson(req, limit = MAX_BODY) {
+  const body = await readBody(req, limit);
+  try { return JSON.parse(body); }
+  catch { throw httpError(400, '올바른 JSON 요청이 필요합니다.'); }
+}
+
+async function readForm(req, limit = MAX_BODY) {
+  const body = await readBody(req, limit);
+  const parameters = new URLSearchParams(body);
+  const input = {};
+  for (const [key, value] of parameters) {
+    if (Object.hasOwn(input, key)) throw httpError(400, '중복된 입력 항목이 있습니다. 문의 페이지에서 다시 작성해 주세요.');
+    Object.defineProperty(input, key, { value, enumerable: true, configurable: true, writable: true });
+  }
+  input.consent = input.consent === 'on' || input.consent === 'true' || input.consent === '1';
+  return input;
 }
 
 function isInside(root, candidate) {
@@ -232,6 +267,7 @@ export function createApp(options = {}) {
   const dataDir = path.resolve(options.dataDir || process.env.DATA_DIR || path.join(ROOT, 'data'));
   const adminToken = options.adminToken ?? process.env.ADMIN_TOKEN ?? '';
   const renderer = options.renderPage;
+  const inquiryRenderer = options.renderInquiryResponse;
   const production = options.production ?? process.env.NODE_ENV === 'production';
   const trustProxy = options.trustProxy ?? Boolean(process.env.FLY_APP_NAME);
   const publicOrigin = options.publicOrigin ?? process.env.PUBLIC_ORIGIN ?? process.env.SITE_URL;
@@ -272,8 +308,35 @@ export function createApp(options = {}) {
     await operation;
   }
 
+  async function respondToInquiry(req, res, status, payload, input) {
+    if (!/^application\/x-www-form-urlencoded(?:\s*;|$)/i.test(req.headers['content-type'] || '')) {
+      return json(res, status, payload);
+    }
+    const values = {
+      type: TYPES.has(input?.type) ? input.type : 'construction',
+      name: typeof input?.name === 'string' ? input.name : '',
+      company: typeof input?.company === 'string' ? input.company : '',
+      phone: typeof input?.phone === 'string' ? input.phone : '',
+      message: typeof input?.message === 'string' ? input.message : '',
+      consent: input?.consent === true,
+    };
+    const result = { status, message: payload.message || payload.error, errors: payload.errors || {}, values, id: payload.id, emailForwarding: payload.emailForwarding };
+    let html;
+    if (typeof inquiryRenderer === 'function') {
+      try {
+        const rendered = await inquiryRenderer(result);
+        html = typeof rendered === 'string' ? rendered : rendered?.html;
+      } catch (error) {
+        console.error('Inquiry response unavailable:', error.code || error.name || 'unknown');
+      }
+    }
+    inquiryHtml(res, status, typeof html === 'string' ? html : fallbackInquiryResponse(result));
+  }
+
   const server = http.createServer(async (req, res) => {
     securityHeaders(res, production);
+    let inquiryInput;
+    let isFormInquiry = false;
     try {
       const rawPath = (req.url || '/').split('?')[0];
       let decoded;
@@ -289,9 +352,10 @@ export function createApp(options = {}) {
       }
       if (pathname === '/api/inquiries') {
         if (req.method === 'POST') {
-          if (!/^application\/json(?:\s*;|$)/i.test(req.headers['content-type'] || '')) {
+          isFormInquiry = /^application\/x-www-form-urlencoded(?:\s*;|$)/i.test(req.headers['content-type'] || '');
+          if (!isFormInquiry && !/^application\/json(?:\s*;|$)/i.test(req.headers['content-type'] || '')) {
             req.resume();
-            return json(res, 415, { error: 'Content-Type은 application/json이어야 합니다.' });
+            return json(res, 415, { error: 'Content-Type은 application/json 또는 application/x-www-form-urlencoded여야 합니다.' });
           }
           if (req.headers.origin) {
             let sameOrigin = false;
@@ -299,19 +363,20 @@ export function createApp(options = {}) {
               const origin = new URL(req.headers.origin);
               sameOrigin = ['http:', 'https:'].includes(origin.protocol) && !origin.username && !origin.password && origin.pathname === '/' && !origin.search && !origin.hash && (publicOrigin ? origin.origin === new URL(publicOrigin).origin : origin.host === req.headers.host?.toLowerCase());
             } catch { /* Reject invalid origins. */ }
-            if (!sameOrigin) { req.resume(); return json(res, 403, { error: '허용되지 않은 요청입니다.' }); }
+            if (!sameOrigin) { req.resume(); return await respondToInquiry(req, res, 403, { error: '허용되지 않은 요청입니다. 문의 페이지에서 다시 작성해 주세요.' }); }
           }
           const retryAfter = takeAttempt(req);
-          if (retryAfter) { req.resume(); res.setHeader('Retry-After', retryAfter); return json(res, 429, { error: '잠시 후 다시 문의해 주세요.' }); }
-          const input = await readJson(req, options.bodyLimit ?? MAX_BODY);
+          if (retryAfter) { req.resume(); res.setHeader('Retry-After', retryAfter); return await respondToInquiry(req, res, 429, { error: '잠시 후 다시 문의해 주세요. 빠른 상담은 대표전화로 연락해 주세요.' }); }
+          const input = isFormInquiry ? await readForm(req, options.bodyLimit ?? MAX_BODY) : await readJson(req, options.bodyLimit ?? MAX_BODY);
+          inquiryInput = input;
           const result = validateInquiry(input);
-          if (!result.valid) return json(res, 422, { ok: false, error: '입력 내용을 확인해 주세요.', errors: result.errors });
-          if (result.honeypot) return json(res, 422, { ok: false, error: '문의 요청을 확인해 주세요.' });
+          if (!result.valid) return await respondToInquiry(req, res, 422, { ok: false, error: '입력 내용을 확인해 주세요.', errors: result.errors }, input);
+          if (result.honeypot) return await respondToInquiry(req, res, 422, { ok: false, error: '문의 요청을 확인해 주세요.' }, input);
           const id = randomUUID();
           const emailForwarding = mailer.initialState();
           await saveInquiry({ id, receivedAt: new Date().toISOString(), ...result.value, privacyVersion: '2026-10-08', ...(emailForwarding ? { emailForwarding } : {}) });
           if (emailForwarding) mailer.schedule(id);
-          return json(res, 201, { ok: true, id, message: '문의가 접수되었습니다. 확인 후 연락드리겠습니다.', ...(emailForwarding ? { emailForwarding: { status: 'pending', deliveryConfirmed: false } } : {}) });
+          return await respondToInquiry(req, res, 201, { ok: true, id, message: '문의가 접수되었습니다. 확인 후 연락드리겠습니다.', ...(emailForwarding ? { emailForwarding: { status: 'pending', deliveryConfirmed: false } } : {}) }, { type: input.type });
         }
         if (req.method === 'GET') {
           if (!validToken) return json(res, 503, { error: '관리자 조회가 설정되어 있지 않습니다.' });
@@ -345,7 +410,9 @@ export function createApp(options = {}) {
       res.end(req.method === 'HEAD' ? undefined : html);
     } catch (error) {
       if (!res.headersSent && !res.destroyed) {
-        json(res, error.status || 500, { error: error.status ? error.message : '서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.' }, req.method);
+        const payload = { error: error.status ? error.message : '서버 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.' };
+        if (isFormInquiry) await respondToInquiry(req, res, error.status || 500, payload, inquiryInput);
+        else json(res, error.status || 500, payload, req.method);
       } else if (!res.destroyed) res.destroy();
       if (!error.status) console.error('Request failed:', error.code || error.name || 'unknown');
     }
@@ -364,13 +431,13 @@ export function createApp(options = {}) {
 }
 
 export async function startServer() {
-  const { renderPage } = await import('./src/render.mjs');
+  const { renderPage, renderInquiryResponse } = await import('./src/render.mjs');
   const port = Number(process.env.PORT || 8080);
   if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('PORT must be between 1 and 65535');
   const dataDir = path.resolve(process.env.DATA_DIR || path.join(ROOT, 'data'));
   await mkdir(dataDir, { recursive: true, mode: 0o700 });
   await access(dataDir, constants.W_OK);
-  const server = createApp({ renderPage });
+  const server = createApp({ renderPage, renderInquiryResponse });
   server.listen(port, process.env.HOST || '0.0.0.0', () => {
     console.log(`유림엔지니어링 website listening on port ${port}`);
     server.retryPendingEmails().catch((error) => console.error('Inquiry email queue unavailable:', error.code || 'STORE_ERROR'));

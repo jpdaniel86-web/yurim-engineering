@@ -1,4 +1,5 @@
 /* Primary fields and their subordinate services share one navigation tree. */
+@font-face{font-family:'Yurim UI';src:url('/assets/fonts/YurimUI.woff2') format('woff2');font-style:normal;font-weight:45 920;font-display:swap}
 .nav-branches,.nav-children,.menu-branches,.menu-children{list-style:none;margin:0;padding:0}
 .nav-dropdown .nav-branch+.nav-branch{border-top:1px solid #e9eee7;margin-top:5px;padding-top:5px}
 .nav-dropdown .nav-branch>a{font-weight:600;line-height:1.6}
@@ -72,4 +73,46 @@
  .service-branch-children{margin-left:29px;padding-left:17px}
  .service-branch-children a{font-size:17px;padding:15px 18px}.service-branch-children small{font-size:12px}
  .service-strip-group .text-link{font-size:14px;align-items:flex-start}.service-strip-children a{font-size:12px}
+}
+
+/* A quieter, consistent interface on detail pages. The main page keeps its type. */
+.inner-page .desktop-nav,.inner-page .nav-dropdown,.inner-page .section-nav,.inner-page .menu-grid,.inner-page .breadcrumb{font-family:'Yurim UI','Noto Sans KR',sans-serif;letter-spacing:-.015em}
+.inner-page .site-header{height:clamp(80px,4.7vw,104px)}
+.inner-page .site-header.scrolled{height:clamp(72px,4.1vw,88px)}
+.inner-page .desktop-nav{font-size:clamp(16px,1.08vw,22px);font-weight:500}
+.inner-page .nav-dropdown{min-width:280px;padding:16px 20px}
+.inner-page .nav-dropdown .nav-branch>a{font-size:16px;font-weight:500;line-height:1.55;padding:9px 3px}
+.inner-page .nav-dropdown .nav-children a{font-size:14px;font-weight:400;line-height:1.55}
+.inner-page .nav-dropdown .branch-current>a,.inner-page .nav-dropdown a[aria-current="page"]{font-weight:600}
+.inner-page .section-nav{box-shadow:0 7px 24px #102e270d}
+.inner-page .section-nav .subnav{min-height:68px}
+.inner-page .section-nav .subnav-item>a{font-size:clamp(15px,1vw,18px);font-weight:500;line-height:1.5;padding:18px 24px}
+.inner-page .section-nav .subnav-item.is-active>a{font-weight:600}
+.inner-page .subnav-children{padding:14px 28px;min-height:60px;gap:24px}
+.inner-page .subnav-parent{font-size:13px;font-weight:500;color:#626e66}
+.inner-page .subnav-children a{font-size:clamp(14px,.88vw,16px);font-weight:400;line-height:1.5}
+.inner-page .subnav-children a[aria-current="page"]{font-weight:600}
+.inner-page .menu-grid h2,.inner-page .menu-grid h2 a{font-size:28px;font-weight:600}
+.inner-page .menu-branches>.menu-branch>a{font-size:16px;font-weight:500}
+.inner-page .menu-grid .menu-children a{font-size:14px;font-weight:400}
+.inner-page .menu-grid .branch-current>a,.inner-page .menu-grid a[aria-current="page"]{font-weight:600}
+.inner-page .image-hero .breadcrumb{font-size:12px}
+.nav-item.nav-dismissed .nav-dropdown{visibility:hidden;opacity:0;pointer-events:none}
+.contact-band :focus-visible,.technology-section :focus-visible,.process-section :focus-visible,.hero :focus-visible,.site-header.on-hero:not(.scrolled) :focus-visible{outline-color:var(--lime)}
+.inner-page .section-nav .subnav-item.is-active>a:focus-visible{outline-color:#fff;outline-offset:-5px}
+@media(max-width:1159px){
+ .inner-page .section-nav .subnav-item>a{padding:18px 20px}
+}
+@media(max-width:900px){
+ .inner-page .site-header{height:80px}.inner-page .site-header.scrolled{height:70px}
+}
+@media(max-width:640px){
+ .inner-page .site-header{height:72px}.inner-page .site-header.scrolled{height:70px}
+ .inner-page .section-nav .subnav{min-height:64px}
+ .inner-page .section-nav .subnav-item>a{font-size:14px;padding:16px 18px;max-width:205px}
+ .inner-page .subnav-children{padding:14px 20px;gap:8px}
+ .inner-page .subnav-parent{font-size:12px}.inner-page .subnav-children a{font-size:14px}
+ .inner-page .menu-grid h2,.inner-page .menu-grid h2 a{font-size:24px}
+ .inner-page .menu-branches>.menu-branch>a{font-size:15px}.inner-page .menu-grid .menu-children a{font-size:13px}
+ .inner-page .image-hero .breadcrumb{font-size:11px}
 }

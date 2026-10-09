@@ -176,3 +176,22 @@
  .footer-phone>a,.footer-phone>span{flex:0 0 auto;white-space:nowrap}
  .footer-phone>a:last-child{flex-basis:100%}
 }
+
+/* Let the lower-page diagram and service labels fit narrow mobile screens. */
+@media(max-width:640px){
+ .technology-section{grid-template-columns:minmax(0,1fr)}
+ .technology-section .tech-intro{min-width:0;padding-right:0}
+ .technology-section .connected-visual{width:100%;max-width:380px;height:340px;margin:20px 0 0;transform:none}
+ .technology-section .orbit-one{width:min(100%,330px);height:auto;aspect-ratio:1}
+ .technology-section .orbit-two{width:70%;height:auto;aspect-ratio:1}
+ .technology-section .connection-center{width:125px;height:125px;padding-top:15px;font-size:40px}
+ .technology-section .connection-center>span{font-size:9px;letter-spacing:.05em}
+ .technology-section .connection-node{width:76px;height:76px;font-size:16px}
+ .technology-section .connection-node span{font-size:12px}
+ .technology-section .n1{top:12px;left:calc(50% - 38px)}
+ .technology-section .n2{top:220px;left:0}
+ .technology-section .n3{top:220px;left:auto;right:0}
+ .technology-section .visual-caption{font-size:10px;letter-spacing:.1em}
+ .service-strip-group .text-link{display:block;position:relative;min-width:0;min-height:50px;padding-right:20px;overflow-wrap:anywhere}
+ .service-strip-group .text-link>span{position:absolute;right:0;top:10px}
+}

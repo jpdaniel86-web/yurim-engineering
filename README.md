@@ -19,6 +19,8 @@ npm start
 
 `data/`, `.env` 및 관리자 토큰은 Git에 올리지 않습니다. 정적 자료는 `public/downloads/`에서 다운로드할 수 있습니다.
 
+상세페이지 메뉴의 `Yurim UI` 글꼴은 [Pretendard v1.3.9](https://github.com/orioncactus/pretendard/tree/v1.3.9)의 가변 웹폰트를 메뉴·페이지 안내에 쓰이는 문자로 줄인 약 90KB의 로컬 파일입니다. 수정된 글꼴 이름을 별도로 지정했으며 SIL Open Font License 및 원저작권 고지는 `public/assets/fonts/OFL-Pretendard.txt`에 포함합니다. 메인 타이포그래피는 기존 Manrope와 Noto Sans KR을 유지합니다.
+
 ## Fly.io 업데이트
 
 이 폴더의 `fly.toml`이 배포 설정입니다. 소스를 수정하고 검증한 뒤 아래 명령으로 업데이트합니다.
@@ -44,7 +46,7 @@ Remove-Variable yurimAdminToken
 
 ## 문의 접수 및 관리자 확인
 
-`POST /api/inquiries`는 JSON으로 아래 필드를 받습니다. 유형 값은 `construction`, `management`, `iot` 중 하나입니다.
+`POST /api/inquiries`는 JSON 또는 HTML 폼의 URLencoded POST를 받습니다. JavaScript가 작동하면 JSON 접수 상태를 화면에서 표시하고, 작동하지 않으면 서버가 오류 입력값을 유지한 HTML이나 접수 완료 화면을 반환합니다. 폼 응답은 캐시에 저장하지 않으며 개인정보를 URL 쿼리에 넣지 않습니다. 유형 값은 `construction`, `management`, `iot` 중 하나입니다.
 
 ```json
 {

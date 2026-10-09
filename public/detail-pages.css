@@ -103,3 +103,14 @@
 /* Preserve the current page name in narrow, nested breadcrumbs. */
 .image-hero .breadcrumb>.breadcrumb-parent{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:1}
 .image-hero .breadcrumb>a:first-child,.image-hero .breadcrumb>.breadcrumb-current{flex-shrink:0}
+
+.inquiry-form .field-error{margin:8px 0 0;font-size:14px;font-weight:400;line-height:1.6;color:#9a462f}
+.inquiry-form [aria-invalid="true"]{border-color:#9a462f;background:#fff7f3}
+.inquiry-form input,.inquiry-form textarea{scroll-margin-top:120px}
+.form-errors{margin-bottom:28px;padding:20px 24px;background:#fff7f3;border-left:3px solid #9a462f;color:#9a462f}
+.form-errors h3{font-size:18px;letter-spacing:-.02em}.form-errors ul{padding-left:20px;margin-bottom:0}.form-errors a{text-decoration:underline}
+.inquiry-confirmation{padding:32px;background:var(--soft-green);border-top:3px solid var(--brand)}
+.inquiry-confirmation h3{font-size:25px}.inquiry-confirmation p{font-size:16px}.inquiry-id{display:block;overflow-wrap:anywhere;font-size:16px;margin-top:8px}
+.search-reset{display:block;margin:20px auto 0;border:1px solid var(--brand);background:#fff;color:var(--brand);padding:10px 20px;font-size:15px;font-weight:500}
+.empty-state.search-empty{padding:36px 20px}.empty-state.search-empty>span{display:none}
+@media(max-width:480px){.inquiry-form .form-row{grid-template-columns:1fr;gap:0}}
