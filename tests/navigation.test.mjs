@@ -50,3 +50,15 @@ test('the default inquiry form selects the matching construction inquiry menu',(
  assert.match(html,/<input type="hidden" name="type" value="construction">/);
  assert.match(sectionNavigation('/contact'),/<a href="\/contact\/construction" class="active" aria-current="page">/);
 });
+
+test('unknown descendants of valid detail pages return 404 instead of duplicating their content',()=>{
+ for(const path of ['/projects/water/nope','/company/ceo/nope','/contact/iot/nope','/technology/water/nope']){
+  assert.equal(renderPage(path).status,404,path);
+ }
+});
+
+test('valid detail URLs continue to accept a single trailing slash',()=>{
+ for(const path of ['/projects/water/','/company/ceo/','/contact/iot/','/technology/water/']){
+  assert.equal(renderPage(path).status,200,path);
+ }
+});

@@ -15,7 +15,7 @@
 .inner-page .section-nav .subnav{list-style:none;position:relative;width:100%;max-width:none;margin:0;padding:0;min-height:74px;gap:0;box-shadow:none}
 .subnav-item{display:flex;align-items:stretch;flex:1 0 auto;border-right:1px solid #e9eee7}
 .subnav-item:last-child{border-right:0}
-.inner-page .section-nav .subnav-item>a{border:0;flex:1;line-height:1.55;white-space:nowrap;padding:20px 28px}
+.inner-page .section-nav .subnav-item>a{font-size:clamp(16px,1.12vw,21px);border:0;flex:1;line-height:1.55;white-space:nowrap;padding:20px 28px}
 .subnav-item.is-active{background:var(--brand);color:#fff}
 .subnav-item.is-active>a.active{background:transparent}
 .subnav-expand{display:flex;align-items:center;justify-content:center;align-self:stretch;flex:0 0 46px;border:0;background:transparent;color:inherit;padding:0 13px;cursor:pointer}
@@ -29,7 +29,7 @@
 .subnav-parent{display:flex;align-items:center;gap:22px;flex:0 0 auto;color:#617467;font-size:14px;font-weight:600}
 .subnav-parent:after{content:'';width:6px;height:6px;border-top:1px solid #79917f;border-right:1px solid #79917f;transform:rotate(45deg)}
 .subnav-children ul{display:flex;flex-wrap:wrap;gap:10px 30px;list-style:none;margin:0;padding:0}
-.subnav-children a{display:block;padding:7px 0;font-size:17px;line-height:1.5;color:#42624f;border-bottom:2px solid transparent}
+.subnav-children a{display:block;padding:7px 0;font-size:clamp(16px,1vw,19px);line-height:1.5;color:#42624f;border-bottom:2px solid transparent}
 .subnav-children a:hover,.subnav-children a[aria-current="page"]{color:var(--brand);border-bottom-color:var(--brand)}
 .subnav-children a[aria-current="page"]{font-weight:700}
 .service-branch-children{list-style:none;margin:0 0 20px 70px;padding:0 0 0 25px;border-left:2px solid #bdd6c4}
@@ -44,7 +44,7 @@
 .service-strip-children a:hover{color:var(--brand)}
 @media(min-width:1600px){
  .nav-dropdown .nav-children a,.menu-grid .menu-children a{font-size:17px}
- .subnav-children a{font-size:19px}.subnav-parent{font-size:17px}
+ .subnav-parent{font-size:17px}
  .subnav-children{padding:20px 36px;gap:32px}.subnav-expand{flex-basis:54px}
  .service-strip-children a{font-size:17px}
 }

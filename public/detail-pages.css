@@ -43,7 +43,7 @@
 .project-image .image-context{right:auto;left:18px;bottom:18px}
 .inner-page .project-tag{background:var(--brand);color:#fff}
 .inner-page .tech-card{background:var(--soft-green);padding:30px;display:flex;flex-direction:column}
-.inner-page .tech-card h2{font-size:32px;margin:15px 0}
+.inner-page .tech-card h2{font-size:clamp(28px,2.2vw,40px);margin:15px 0}
 .inner-page .tech-card p{max-width:100%;margin-bottom:26px}
 .inner-page .tech-card>.detail-photo{height:auto;aspect-ratio:1.9;width:calc(100% + 60px);max-width:none;margin:10px -30px -30px;object-fit:cover}
 .inner-page .tech-card>.circle-arrow{right:20px;bottom:20px;background:var(--lime);color:var(--deep);border:0}
@@ -65,7 +65,7 @@
 .inner-page .inquiry-form input:focus,.inner-page .inquiry-form textarea:focus{outline-color:var(--brand);border-color:var(--brand)}
 @media(min-width:1800px){
  .inner-page .subnav a{font-size:21px;padding:24px 34px}.inner-page .subnav .nested{font-size:19px!important}
- .inner-page .tech-card h2{font-size:40px}.detail-photo-grid figcaption{font-size:17px}
+ .detail-photo-grid figcaption{font-size:17px}
 }
 @media(max-width:1159px){
  .inner-page .subnav a{font-size:16px;padding:18px 22px}.inner-page .subnav .nested{font-size:15px!important}
@@ -99,3 +99,7 @@
  .image-context{font-size:10px;right:10px;bottom:10px}
  .inner-page .equipment-photo figcaption{font-size:12px}
 }
+
+/* Preserve the current page name in narrow, nested breadcrumbs. */
+.image-hero .breadcrumb>.breadcrumb-parent{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex-shrink:1}
+.image-hero .breadcrumb>a:first-child,.image-hero .breadcrumb>.breadcrumb-current{flex-shrink:0}

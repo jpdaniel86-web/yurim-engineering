@@ -27,8 +27,8 @@
 .subnav .nested{font-size:16px!important}
 .eyebrow{font-size:13px}
 .text-link,.button,.light-link{font-size:17px}
-.section-heading p{font-size:19px;line-height:1.8}
-.business-card p,.tech-intro p{font-size:17px}
+.section-heading p{font-size:clamp(17px,1.35vw,21px);line-height:1.8}
+.business-card p,.tech-intro p{font-size:clamp(17px,1.1vw,21px)}
 .business-card-top{font-size:14px}
 .service-strip .text-link{font-size:16px}
 .project-info>span,.project-info p{font-size:16px}
@@ -39,7 +39,7 @@
 .file-type{font-size:13px}.source-note{font-size:15px}.round-link{font-size:17px}
 .footer-top p,.footer-top .muted{font-size:16px}.footer-phone{font-size:18px}.footer-bottom{font-size:14px}
 .breadcrumb{font-size:13px}
-.large-copy{font-size:23px}.feature-line h3{font-size:22px}.feature-line p{font-size:17px}
+.large-copy{font-size:clamp(19px,calc(15px + .5vw),23px);line-height:1.75}.feature-line h3{font-size:22px}.feature-line p{font-size:17px}
 .scope-grid h3{font-size:23px}.scope-grid p{font-size:17px}.scope-grid span{font-size:14px}
 .process-list li span{font-size:13px}.process-list li h3{font-size:23px}
 .service-row p{font-size:17px}.service-row .eyebrow{font-size:13px}.row-no{font-size:14px}
@@ -151,7 +151,7 @@
  .nav-dropdown{min-width:350px}.nav-dropdown a{font-size:19px}.nav-dropdown .nested{font-size:17px!important}
  .hero-bottom{font-size:clamp(15px,0.76vw,18px);bottom:40px}
  .menu-toggle,.menu-toggle span{width:32px}.menu-toggle{gap:9px}.menu-toggle span{height:2px}
- .text-link,.button,.light-link{font-size:19px}.section-heading p,.business-card p,.tech-intro p{font-size:21px}
+ .text-link,.button,.light-link{font-size:19px}
  .service-strip .text-link{font-size:19px}.project-info>span,.project-info p{font-size:18px}
  .resource-row p,.proof-stats p{font-size:18px}.proof-source{font-size:16px}
  .footer-top p,.footer-top .muted{font-size:clamp(17px,0.95vw,22px)}
@@ -168,4 +168,11 @@
  .hero .hero-subtitle{font-size:17px;margin-top:24px}
  .hero .hero-content:before{height:2px;width:40px;margin-bottom:24px}
  .hero-bottom{font-size:11px}
+}
+
+/* Keep mobile contact details intact instead of squeezing their digits. */
+@media(max-width:640px){
+ .footer-phone{flex-wrap:wrap;gap:8px 22px}
+ .footer-phone>a,.footer-phone>span{flex:0 0 auto;white-space:nowrap}
+ .footer-phone>a:last-child{flex-basis:100%}
 }
