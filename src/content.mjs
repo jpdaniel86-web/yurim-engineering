@@ -1,7 +1,7 @@
 export const company = {name:'유림엔지니어링(주)',en:'YURIM ENGINEERING',tel:'031-774-8358',fax:'031-774-8359',email:'yurimkorea@gmail.com',address:'경기도 양평군 양평읍 창대리 649-6 에이스빌딩 2층',roadAddress:'경기도 양평군 양평읍 남북로 62 에이스빌딩 2층'};
 export const nav = [
  {label:'환경',en:'ENVIRONMENT',path:'/environment',items:[['개인하수처리시설 설계시공','/environment/water'],['개인하수처리시설 관리','/environment/management'],['IoT 스마트 관리','/environment/iot',1],['악취 저감사업','/environment/odor']]},
- {label:'건설',en:'CONSTRUCTION',path:'/construction',items:[['상하수도공사','/construction/pipeline'],['철근콘크리트공사','/construction/concrete'],['수평오거천공','/construction/auger',1]]},
+ {label:'건설',en:'CONSTRUCTION',path:'/construction',items:[['상하수도공사','/construction/pipeline'],['철근콘크리트공사','/construction/concrete'],['수평오거천공','/construction/auger']]},
  {label:'시공실적',en:'PROJECTS',path:'/projects',items:[['전체','/projects'],['환경','/projects/environment'],['개인하수처리시설','/projects/water',1],['시설관리','/projects/management',1],['악취저감','/projects/odor',1],['건설','/projects/construction'],['상하수도','/projects/pipeline',1],['철근콘크리트','/projects/concrete',1],['수평오거천공','/projects/auger',1]]},
  {label:'기술·장비',en:'TECHNOLOGY',path:'/technology',items:[['하수처리 기술','/technology/water'],['IoT 기술','/technology/iot'],['악취저감 기술','/technology/odor'],['수평오거천공 기술','/technology/auger'],['보유장비','/technology/equipment']]},
  {label:'회사소개',en:'COMPANY',path:'/company',items:[['회사개요','/company'],['CEO 인사말','/company/ceo'],['연혁','/company/history'],['면허·인증','/company/certifications'],['오시는 길','/company/location']]},
