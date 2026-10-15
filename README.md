@@ -19,7 +19,13 @@ npm start
 
 `data/`, `.env` 및 관리자 토큰은 Git에 올리지 않습니다. 정적 자료는 `public/downloads/`에서 다운로드할 수 있습니다.
 
-상세페이지 메뉴의 `Yurim UI` 글꼴은 [Pretendard v1.3.9](https://github.com/orioncactus/pretendard/tree/v1.3.9)의 가변 웹폰트를 메뉴·페이지 안내에 쓰이는 문자로 줄인 약 90KB의 로컬 파일입니다. 수정된 글꼴 이름을 별도로 지정했으며 SIL Open Font License 및 원저작권 고지는 `public/assets/fonts/OFL-Pretendard.txt`에 포함합니다. 메인 타이포그래피는 기존 Manrope와 Noto Sans KR을 유지합니다.
+상세페이지 메뉴의 `Yurim UI` 글꼴은 [Pretendard v1.3.9](https://github.com/orioncactus/pretendard/tree/v1.3.9)의 가변 웹폰트를 메뉴·페이지 안내에 쓰이는 문자로 줄인 약 93KB의 로컬 파일입니다. 수정된 글꼴 이름을 별도로 지정했으며 SIL Open Font License 및 원저작권 고지는 `public/assets/fonts/OFL-Pretendard.txt`에 포함합니다. 메인 타이포그래피는 기존 Manrope와 Noto Sans KR을 유지합니다.
+
+## 2026-10-15 디자인 수정
+
+승인된 명함의 YURIM 타원형 로고를 SVG로 재구성하고 CI의 메인 블루 `#1689BD`, 딥 블루 `#0876A8`, 라이트 블루 `#EAF5FA`를 적용했습니다. 메인 영상은 Higgsfield Seedance 2.5로 생성한 1920×1080, 8.04초 무음 영상이며 브라우저 호환 H.264 형식으로 제공합니다. 새 포스터·공유 이미지에도 같은 색상과 로고를 사용합니다.
+
+디자인 수정 요청서의 건설 실적 25건(상하수도 11건, 철근콘크리트 3건, 수평오거천공 11건)을 공종·연도별로 정리했습니다. 공사명, 규격, 거리, 가시설 치수와 명시된 발주처를 보존하고, 진행 중으로 명시된 2026년 경북도청 신도시 실적에만 해당 상태를 표시합니다. 공사별 사진이 없는 신규 실적은 사실 정보와 공법 개념도로 안내합니다. 기존 환경 실적 4건은 유지합니다. 새 유료 이미지·영상 생성은 비용과 생성 개수를 안내하고 사용자의 명시적 동의를 받은 후에만 진행합니다.
 
 ## Fly.io 업데이트
 

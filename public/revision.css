@@ -1,0 +1,71 @@
+/* The business-card mark and the supplied construction records. */
+.brand .brand-mark{width:clamp(56px,4vw,78px);height:auto;max-height:56px;object-fit:contain;flex:0 0 auto}
+.site-header .brand{gap:10px}.menu-top .brand .brand-mark{width:64px}.site-footer .brand .brand-mark{width:72px}
+.project-filters{display:flex;align-items:flex-end;gap:28px;min-width:0}
+.year-filter{display:flex;flex-direction:column;gap:5px;font-size:12px;color:var(--muted)}
+.year-filter select{border:0;border-bottom:1px solid var(--ink);background:#fff;color:var(--ink);border-radius:0;padding:9px 28px 10px 0;font-size:16px;min-height:46px;min-width:138px;cursor:pointer}
+.project-filters .search-box{min-width:260px;margin:0}.project-filters .search-box input{font-size:16px}
+.project-toolbar .project-result-count{color:var(--brand);font-weight:600;margin:12px 0 0;font-size:15px}
+.project-card{min-width:0}.project-record{display:flex;flex-direction:column;min-height:350px;padding:32px;border:1px solid var(--line);background:#fff;transition:border-color .2s,background .2s;overflow:hidden}
+.project-record:hover{background:var(--soft-green);border-color:var(--brand-main)}
+.record-top{display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:22px;font-size:13px;color:var(--brand)}
+.record-field{font-weight:600}.record-status{font-size:12px;white-space:nowrap;color:var(--muted)}
+.record-status.ongoing{background:var(--brand);color:#fff;padding:4px 10px}
+.record-year{font-size:54px;font-weight:500;line-height:1.1;letter-spacing:-.05em;color:var(--brand);margin-bottom:18px}
+.record-year>span{font-size:10px;letter-spacing:.12em;margin-left:10px;font-weight:600}
+.project-record h2,.project-record h3{font-size:clamp(23px,1.7vw,30px);font-weight:600;line-height:1.55;letter-spacing:-.035em;margin:0 0 14px;overflow-wrap:anywhere}
+.record-location{font-size:15px;margin:0 0 24px;color:var(--muted)}
+.record-bottom{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-top:auto;padding-top:22px;border-top:1px solid var(--line);font-size:13px;line-height:1.7;color:var(--muted)}
+.record-bottom>span:first-child{min-width:0;overflow-wrap:anywhere}.record-arrow{color:var(--brand);font-size:26px;flex:0 0 auto}
+.home-projects{align-items:stretch}
+.home-projects .featured-record{min-height:420px;position:relative;isolation:isolate;background:var(--deep);border-color:var(--deep);color:#fff;padding:36px}
+.featured-record:before{content:'';position:absolute;right:-80px;bottom:10px;width:90%;height:80%;background:url('/assets/auger.svg') center/contain no-repeat;opacity:.12;z-index:-1;pointer-events:none}
+.featured-record .record-top,.featured-record .record-year,.featured-record .record-arrow{color:var(--lime)}
+.featured-record .record-status:not(.ongoing),.featured-record .record-location,.featured-record .record-bottom{color:#d4e4ee}
+.featured-record .record-bottom{border-color:#ffffff35}.featured-record h3{max-width:90%;font-size:clamp(26px,2.3vw,40px)}
+.featured-record .record-year{font-size:clamp(58px,4.5vw,80px);margin-bottom:24px}.featured-record .record-status.ongoing{background:#fff;color:var(--brand)}
+.service-portfolio{padding-top:76px}.portfolio-summary{font-size:16px;color:var(--muted);margin:-10px 0 34px}
+.portfolio-year{display:grid;grid-template-columns:150px minmax(0,1fr);gap:40px;padding:28px 0;border-top:1px solid var(--line)}
+.portfolio-year>h3{font-size:44px;font-weight:500;letter-spacing:-.04em;color:var(--brand);margin:18px 0}
+.portfolio-year>h3>span{display:block;font-size:10px;font-weight:600;letter-spacing:.13em;margin-top:6px}
+.portfolio-list{list-style:none;padding:0;margin:0}.portfolio-list li+li{border-top:1px solid var(--line)}
+.portfolio-list a{display:grid;grid-template-columns:minmax(0,1fr) 24px;gap:24px;align-items:center;padding:23px 0}
+.portfolio-list h4{font-size:20px;font-weight:500;line-height:1.65;letter-spacing:-.025em;margin:0;overflow-wrap:anywhere}
+.portfolio-list p{font-size:14px;line-height:1.75;margin:9px 0 0}.portfolio-state{display:inline-flex;font-size:12px;white-space:nowrap;color:var(--brand);margin-top:10px;background:var(--soft-green);padding:3px 8px;font-weight:600}
+.portfolio-list a>span:last-child{font-size:24px;color:var(--brand)}.portfolio-list a:hover h4{color:var(--brand);text-decoration:underline;text-underline-offset:5px}
+.method-description{max-width:1150px;padding-top:0}.method-description h2{font-size:clamp(28px,2.6vw,42px);margin:16px 0 30px}
+.method-description p,.method-copy{font-size:17px;line-height:1.95;overflow-wrap:anywhere}
+.inner-page .scope-grid h3{line-height:1.55;overflow-wrap:anywhere}
+.inner-page .page-hero.image-hero.project-hero{height:auto;min-height:360px;padding:86px 4vw 66px}
+.project-hero .page-hero-copy{padding-top:0}.project-hero h1{font-size:clamp(27px,2.6vw,48px);line-height:1.4;max-width:1180px;margin:16px auto;overflow-wrap:anywhere}
+.construction-project-detail{display:grid;grid-template-columns:1.1fr .9fr;gap:48px 70px;align-items:start}
+.project-record-heading{min-width:0}.project-record-heading h2,.project-specifications h2{font-size:32px;margin:18px 0 25px}
+.project-record-heading .detail-table{margin-bottom:30px}.project-record-heading dd{overflow-wrap:anywhere}
+.project-method-visual{align-self:start;background:var(--paper);border:1px solid var(--line);padding:32px}
+.project-method-visual>img{width:100%;aspect-ratio:1.3;object-fit:contain}.project-method-visual>span{display:block;font-size:12px;color:var(--muted);margin-top:18px}
+.project-specifications{grid-column:1/-1;padding-top:15px}.project-specifications dl{margin:0;border-top:1px solid var(--ink)}
+.project-specifications dl>div{display:grid;grid-template-columns:240px minmax(0,1fr);gap:30px;padding:22px 0;border-bottom:1px solid var(--line);line-height:1.8;font-size:17px}
+.project-specifications dt{font-weight:500;color:var(--brand)}.project-specifications dd{margin:0;overflow-wrap:anywhere}
+@media(max-width:1100px){
+ .project-toolbar{align-items:flex-start;flex-direction:column;gap:28px}.project-filters{width:100%;justify-content:space-between}
+ .project-filters .search-box{flex:1;max-width:420px}.construction-project-detail{gap:40px}
+ .portfolio-year{grid-template-columns:115px minmax(0,1fr);gap:25px}
+}
+@media(max-width:640px){
+ .brand .brand-mark{width:48px;max-height:38px}.site-header .brand{gap:8px}.site-header .brand>span{font-size:16px}.site-header .brand small{font-size:6.5px}
+ .menu-top .brand .brand-mark{width:48px}.site-footer .brand .brand-mark{width:56px}
+ .project-filters{gap:20px;align-items:stretch;flex-direction:column}.year-filter{flex-direction:row;align-items:center;gap:18px}.year-filter select{flex:1}
+ .project-filters .search-box{min-width:0;max-width:none;flex:auto;width:100%}.project-toolbar{margin-bottom:30px}
+ .project-record{padding:24px;min-height:330px}.record-top{font-size:12px;gap:10px}.record-field{max-width:70%}.record-status{font-size:11px}
+ .record-year{font-size:46px}.project-record h2,.project-record h3{font-size:23px}.record-location{font-size:14px}
+ .home-projects .featured-record{padding:27px;min-height:390px}.featured-record h3{font-size:28px;max-width:100%}.featured-record .record-year{font-size:58px}
+ .service-portfolio{padding-top:60px}.portfolio-year{grid-template-columns:1fr;gap:0;padding:18px 0}.portfolio-year>h3{font-size:34px;margin:14px 0}
+ .portfolio-year>h3>span{display:inline;font-size:9px;margin-left:12px}.portfolio-list a{grid-template-columns:minmax(0,1fr) 22px;gap:14px;padding:20px 0}
+ .portfolio-list h4{font-size:17px}.portfolio-list p{font-size:13px}
+ .method-description p,.method-copy{font-size:16px}.method-description h2{font-size:28px}
+ .inner-page .page-hero.image-hero.project-hero{min-height:300px;padding:78px 24px 56px}.project-hero h1{font-size:25px;line-height:1.5}
+ .construction-project-detail{grid-template-columns:minmax(0,1fr);gap:34px}.project-record-heading h2,.project-specifications h2{font-size:27px}
+ .project-method-visual{padding:24px;max-width:100%}.project-specifications{grid-column:1;padding-top:0}
+ .project-specifications dl>div{grid-template-columns:minmax(0,1fr);gap:8px;padding:20px 0;font-size:16px}
+}
+@media(max-width:360px){.site-header .brand .brand-mark{width:42px}.site-header .header-tools{gap:15px}}

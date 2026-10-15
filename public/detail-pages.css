@@ -1,28 +1,28 @@
-/* Photo-led inner pages, with Yurim green and lime accents. */
-:root{--brand:#00843d;--soft-green:#f1f6ed}
+/* Photo-led inner pages, with Yurim blue accents. */
+:root{--brand:#0876a8;--soft-green:#eaf5fa}
 .inner-page .nav-item>a[aria-current]{color:var(--brand)}
 .nav-item:last-child .nav-dropdown{left:auto;right:0}
 .inner-page .page-hero.image-hero{position:relative;isolation:isolate;min-height:0;height:clamp(380px,24vw,480px);padding:48px 4vw 66px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--deep);color:#fff;text-align:center}
 .page-hero-image,.page-hero-shade{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
 .page-hero-image{object-fit:cover;object-position:center 48%}
-.page-hero-shade{z-index:-1;background:linear-gradient(90deg,#082e2373,#082e2329),linear-gradient(0deg,#06291fd9,transparent 85%)}
+.page-hero-shade{z-index:-1;background:linear-gradient(90deg,#0b202b73,#0b202b29),linear-gradient(0deg,#091c26d9,transparent 85%)}
 .image-hero .breadcrumb{position:absolute;left:4vw;right:4vw;top:26px;margin:0;justify-content:flex-start;color:#ffffffc4;text-align:left;font-size:12px}
 .image-hero .breadcrumb a:hover{color:var(--lime)}
 .page-hero-copy{max-width:1450px;padding-top:22px}
 .image-hero .eyebrow{font-size:clamp(13px,1.04vw,17px);letter-spacing:.12em;color:var(--lime);font-weight:700}
-.image-hero h1{color:#fff;font-size:clamp(36px,3.42vw,68px);font-weight:700;line-height:1.28;margin:14px 0 17px;letter-spacing:-.055em;text-shadow:0 2px 18px #06291f45}
+.image-hero h1{color:#fff;font-size:clamp(36px,3.42vw,68px);font-weight:700;line-height:1.28;margin:14px 0 17px;letter-spacing:-.055em;text-shadow:0 2px 18px #091c2645}
 .page-hero-lead{color:#ffffffd9;font-size:clamp(17px,1.19vw,23px);line-height:1.65;margin:0}
-.hero-image-context{position:absolute;right:4vw;bottom:48px;padding:5px 10px;background:#092e23aa;color:#ffffffd9;font-size:12px;letter-spacing:0}
-.inner-page .subnav{position:relative;z-index:3;display:flex;align-items:stretch;gap:0;max-width:1760px;width:calc(100% - 8vw);min-height:74px;margin:-32px auto 0;padding:0;background:#fff;border:0;box-shadow:0 12px 34px #102e2712;scrollbar-width:thin;scrollbar-color:#b7cbbb #fff}
-.inner-page .subnav a{display:flex;align-items:center;justify-content:center;flex:1 0 auto;padding:20px 28px;font-size:17px;border-right:1px solid #e9eee7;transition:background .2s,color .2s}
+.hero-image-context{position:absolute;right:4vw;bottom:48px;padding:5px 10px;background:#0b212caa;color:#ffffffd9;font-size:12px;letter-spacing:0}
+.inner-page .subnav{position:relative;z-index:3;display:flex;align-items:stretch;gap:0;max-width:1760px;width:calc(100% - 8vw);min-height:74px;margin:-32px auto 0;padding:0;background:#fff;border:0;box-shadow:0 12px 34px #102f4212;scrollbar-width:thin;scrollbar-color:#b8d3e0 #fff}
+.inner-page .subnav a{display:flex;align-items:center;justify-content:center;flex:1 0 auto;padding:20px 28px;font-size:17px;border-right:1px solid #e2edf2;transition:background .2s,color .2s}
 .inner-page .subnav a:hover{color:var(--brand);background:var(--soft-green)}
 .inner-page .subnav a.active{background:var(--brand);color:#fff;font-weight:700}
 .inner-page .subnav a.active:after{display:none}
 .inner-page .subnav .nested{font-size:16px!important;opacity:1;padding-left:25px!important}
 .inner-page .section .eyebrow{color:var(--brand)}
-.inner-page .section-heading h2,.inner-page .service-summary h2,.inner-page .technology-detail h2,.inner-page .equipment-layout h2,.inner-page .project-description h2,.inner-page .company-intro h2,.inner-page .history>h2,.inner-page .certification-page>h2,.inner-page .location-info h2,.inner-page .contact-intro h2{border-left:5px solid var(--brand);padding-left:22px}
+.inner-page .section-heading h2,.inner-page .service-summary h2,.inner-page .technology-detail h2,.inner-page .equipment-layout h2,.inner-page .project-description h2,.inner-page .company-intro h2,.inner-page .history>h2,.inner-page .certification-page>h2,.inner-page .location-info h2,.inner-page .contact-intro h2{border-left:5px solid var(--brand-main);padding-left:22px}
 .inner-page .button{background:var(--brand)}
-.inner-page .button:hover{background:#006c32}
+.inner-page .button:hover{background:#08658f}
 .inner-page .service-visual,.inner-page .technology-visual{aspect-ratio:1.55;min-height:0;overflow:hidden;background:var(--soft-green)}
 .inner-page .service-visual>img,.inner-page .technology-visual>img{width:100%;height:100%;object-fit:cover}
 .inner-page .service-visual>img[src$="smart-inspection.jpg"],.inner-page .technology-visual>img[src$="smart-inspection.jpg"]{object-position:70% center}
@@ -31,7 +31,7 @@
 .detail-photo-grid figure{margin:0}
 .detail-photo-grid img{width:100%;aspect-ratio:1.8;object-fit:cover}
 .detail-photo-grid figcaption{font-size:15px;color:var(--muted);margin-top:14px}
-.inner-page .scope-grid>div{padding:26px;background:var(--soft-green);border-top:3px solid var(--lime)}
+.inner-page .scope-grid>div{padding:26px;background:var(--soft-green);border-top:3px solid var(--brand-main)}
 .inner-page .scope-grid>div>span{color:var(--brand);font-weight:800;letter-spacing:.05em}
 .inner-page .scope-grid h3{margin-top:15px}
 .inner-page .process-section{max-width:none;background:var(--deep);color:#fff}
@@ -56,11 +56,11 @@
 .inner-page .company-values p{color:#ffffffba}
 .inner-page .ceo-aside{position:relative;isolation:isolate;overflow:hidden;background:var(--deep);color:#fff}
 .inner-page .ceo-aside>.detail-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:42% center;z-index:-2}
-.inner-page .ceo-aside:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#06291f45,#06291f90);z-index:-1}
+.inner-page .ceo-aside:after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,#091c2645,#091c2690);z-index:-1}
 .inner-page .timeline-row>strong{color:var(--brand)}
-.inner-page .document-panels>div{border-top:3px solid var(--lime);background:var(--soft-green)}
+.inner-page .document-panels>div{border-top:3px solid var(--brand-main);background:var(--soft-green)}
 .inner-page .resource-row:hover{background:var(--soft-green)}
-.inner-page .file-type{color:var(--brand);border-color:#bdd8c7}
+.inner-page .file-type{color:var(--brand);border-color:#bddbea}
 .inner-page .search-box:focus-within{border-color:var(--brand)}
 .inner-page .inquiry-form input:focus,.inner-page .inquiry-form textarea:focus{outline-color:var(--brand);border-color:var(--brand)}
 @media(min-width:1800px){

@@ -7,8 +7,8 @@ function sectionNavigation(path){
 }
 function visibleProjectKinds(path){
  const html=renderPage(path).html;
- return [...html.matchAll(/<a class="project-card"[^>]*>/g)]
-  .filter(([tag])=>!/(?:\s)hidden(?:\s|>)/.test(tag))
+ return [...html.matchAll(/<a\b[^>]*\bclass="([^"]*)"[^>]*>/g)]
+  .filter(([tag,classes])=>classes.split(/\s+/).includes('project-card')&&!/(?:\s)hidden(?:\s|>)/.test(tag))
   .map(([tag])=>tag.match(/data-kind="([^"]+)"/)?.[1]);
 }
 
@@ -32,10 +32,17 @@ test('all three construction fields remain primary tabs',()=>{
 test('project fields show only matching records before JavaScript runs',()=>{
  assert.deepEqual(visibleProjectKinds('/projects/water'),['water']);
  assert.deepEqual(visibleProjectKinds('/projects/odor'),['odor','odor','odor']);
- for(const slug of ['management','construction','pipeline','concrete','auger']){
-  assert.deepEqual(visibleProjectKinds('/projects/'+slug),[]);
-  assert.match(renderPage('/projects/'+slug).html,/<div class="empty-state" >/);
+ for(const [slug,count] of [['pipeline',11],['concrete',3],['auger',11]]){
+  assert.deepEqual(visibleProjectKinds('/projects/'+slug),Array(count).fill(slug));
  }
+ const construction=visibleProjectKinds('/projects/construction');
+ assert.equal(construction.length,25);
+ assert.equal(construction.filter(kind=>kind==='pipeline').length,11);
+ assert.equal(construction.filter(kind=>kind==='concrete').length,3);
+ assert.equal(construction.filter(kind=>kind==='auger').length,11);
+ assert.equal(visibleProjectKinds('/projects').length,29);
+ assert.deepEqual(visibleProjectKinds('/projects/management'),[]);
+ assert.match(renderPage('/projects/management').html,/<div class="empty-state" >/);
 });
 
 test('an empty facility-management archive directs inquiries to facility management',()=>{
