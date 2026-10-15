@@ -69,3 +69,24 @@
  .project-specifications dl>div{grid-template-columns:minmax(0,1fr);gap:8px;padding:20px 0;font-size:16px}
 }
 @media(max-width:360px){.site-header .brand .brand-mark{width:42px}.site-header .header-tools{gap:15px}}
+
+/* The CEO portrait keeps the supplied photograph at its natural proportions. */
+.inner-page .ceo-message{grid-template-columns:minmax(260px,320px) minmax(0,1fr);gap:clamp(40px,6vw,90px);max-width:1320px;align-items:start}
+.inner-page .ceo-aside.ceo-portrait{isolation:auto;min-height:0;max-width:320px;width:100%;margin:0;padding:24px 22px;background:#fff;border:1px solid var(--line);border-top:3px solid var(--brand-main);color:var(--ink);font-size:16px;letter-spacing:0;overflow:visible}
+.inner-page .ceo-aside.ceo-portrait:after{content:none;display:none}
+.ceo-portrait .ceo-photo{position:static;display:block;width:274px;max-width:100%;height:auto;aspect-ratio:auto;object-fit:contain;margin:0 auto;background:#fff}
+.ceo-portrait figcaption{border-top:1px solid var(--line);margin-top:22px;padding-top:18px;text-align:center;line-height:1.7}
+.ceo-portrait figcaption>span{display:block;font-size:13px;color:var(--muted)}
+.ceo-portrait figcaption>strong{display:block;margin-top:5px;font-size:19px;font-weight:600;color:var(--brand)}
+.ceo-message article{min-width:0}
+.ceo-message article .ceo-signature{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 18px;line-height:1.8;color:var(--ink)}
+.ceo-signature>span:first-child{font-size:15px;font-weight:500;color:var(--muted)}
+.ceo-signature>span:last-child{font-size:17px;font-weight:500}
+.ceo-signature b{font-size:23px;font-weight:600;margin-left:7px;white-space:nowrap}
+@media(max-width:760px){
+ .inner-page .ceo-message{grid-template-columns:minmax(0,1fr);gap:36px}
+ .inner-page .ceo-aside.ceo-portrait{max-width:260px;justify-self:center;padding:20px 18px}
+ .ceo-portrait figcaption{margin-top:18px;padding-top:15px}
+ .ceo-portrait figcaption>strong{font-size:18px}
+ .ceo-message article .ceo-signature{margin-top:32px;gap:5px 15px}
+}
