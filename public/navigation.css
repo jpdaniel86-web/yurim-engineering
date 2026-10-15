@@ -98,7 +98,8 @@
 .inner-page .menu-grid .branch-current>a,.inner-page .menu-grid a[aria-current="page"]{font-weight:600}
 .inner-page .image-hero .breadcrumb{font-size:12px}
 .nav-item.nav-dismissed .nav-dropdown{visibility:hidden;opacity:0;pointer-events:none}
-.contact-band :focus-visible,.technology-section :focus-visible,.process-section :focus-visible,.hero :focus-visible,.site-header.on-hero:not(.scrolled) :focus-visible{outline-color:var(--lime)}
+.contact-band :focus-visible{outline-color:#fff}
+.technology-section :focus-visible,.process-section :focus-visible,.hero :focus-visible,.site-header.on-hero:not(.scrolled) :focus-visible{outline-color:var(--lime)}
 .inner-page .section-nav .subnav-item.is-active>a:focus-visible{outline-color:#fff;outline-offset:-5px}
 @media(max-width:1159px){
  .inner-page .section-nav .subnav-item>a{padding:18px 20px}
