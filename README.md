@@ -13,7 +13,7 @@ npm start
 ## GitHub와 배포 주소
 
 - 홈페이지: https://yurim-engineering.fly.dev
-- 비공개 GitHub 저장소: https://github.com/jpdaniel86-web/yurim-engineering
+- GitHub 저장소: https://github.com/jpdaniel86-web/yurim-engineering
 - Fly.io 앱: `yurim-engineering`, 도쿄 `nrt`, 단일 Machine
 - 문의 수신: `yurimkorea@gmail.com`
 
